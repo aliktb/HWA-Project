@@ -39,9 +39,28 @@ public class BookService {
   public List<BookWithUsernameDTO> getAll() {
     return this.repo.findAll().stream().map(this::mapToDTO).collect(Collectors.toList());
   }
-  
+
   // READ BY ID
-  public 
+  public BookWithUsernameDTO getById(Long id) {
+    Book readBook = this.repo.findById(id).get();
+    return mapToDTO(readBook);
+  }
+
+  public Book update(Long id, Book book) {
+    Book existing = this.repo.findById(id).get();
+    existing.setAuthorFirstName(book.getAuthorFirstName());
+    existing.setAuthorLastName(book.getAuthorLastName());
+    existing.setBookTitle(book.getBookTitle());
+    existing.setCheckedOut(book.isCheckedOut());
+
+    return existing;
+  }
+
+  // DELETE
+  public Boolean delete(Long id) {
+    this.repo.deleteById(id);
+    return !this.repo.existsById(id);
+  }
 
 
 
