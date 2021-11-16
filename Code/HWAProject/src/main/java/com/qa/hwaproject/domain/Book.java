@@ -4,8 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import org.springframework.data.annotation.Id;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,23 +28,19 @@ public class Book {
   private String bookTitle;
 
   @Column(name = "checked_out")
-  private Boolean checkedOut;
+  private boolean checkedOut;
 
-  @Column(name = "customer_id")
-  private Long customerCheckedId;
 
   @ManyToOne
-  private Book book;
+  private Customer customer;
 
-  public Book(String authorLastName, String authorFirstName, String bookTitle, Boolean checkedOut,
-      Long customerCheckedId, Book book) {
+  public Book(String authorLastName, String authorFirstName, String bookTitle, Boolean checkedOut) {
     super();
     this.authorLastName = authorLastName;
     this.authorFirstName = authorFirstName;
     this.bookTitle = bookTitle;
     this.checkedOut = checkedOut;
-    this.customerCheckedId = customerCheckedId;
-    this.book = book;
+
   }
 
 
