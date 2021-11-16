@@ -23,8 +23,14 @@ public class BookService {
     dto.setId(book.getId());
     dto.setAuthorFirstName(book.getAuthorFirstName());
     dto.setAuthorLastName(book.getAuthorLastName());
-    dto.setBookTitle(book.getCustomer().getUsername());
+    dto.setBookTitle(book.getBookTitle());
     dto.setCheckedOut(book.isCheckedOut());
+    if (book.getCustomer() != null) {
+      dto.setUsername(book.getCustomer().getUsername());
+    } else {
+      dto.setUsername("no customer");
+    }
+
 
     return dto;
 
