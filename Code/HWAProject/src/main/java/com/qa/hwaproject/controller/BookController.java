@@ -63,6 +63,15 @@ public class BookController {
     return new ResponseEntity<Book>(this.service.returnBook(id), HttpStatus.ACCEPTED);
   }
 
+  // Get books by username
+  @GetMapping("/getBooksByUsername/{username}")
+  public ResponseEntity<List<BookWithUsernameDTO>> getBooksByUsername(
+      @PathVariable String username) {
+
+    return new ResponseEntity<List<BookWithUsernameDTO>>(this.service.getBooksByUsername(username),
+        HttpStatus.OK);
+  }
+
 
   // Delete
   @DeleteMapping("/delete/{id}")
