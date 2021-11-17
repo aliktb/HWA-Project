@@ -53,6 +53,14 @@ public class BookService {
     return mapToDTO(readBook);
   }
 
+  // READ BY USERNAME
+  public List<BookWithUsernameDTO> getBooksByUsername(String username) {
+
+    return this.repo.findBooksByUsername(username).stream().map(this::mapToDTO)
+        .collect(Collectors.toList());
+  }
+
+
   // UPDATE
   public Book update(Long id, Book book) {
     Book existing = this.repo.findById(id).get();
@@ -82,6 +90,7 @@ public class BookService {
 
     return this.repo.saveAndFlush(toBeReturned);
   }
+
 
   // DELETE
   public Boolean delete(Long id) {
