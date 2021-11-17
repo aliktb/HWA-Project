@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS `customer` CASCADE;
+CREATE TABLE `customer`
+(
+	`id` BIGINT PRIMARY KEY AUTO_INCREMENT,
+	`first_name` VARCHAR(255) NOT NULL,
+	`last_name` VARCHAR(255) NOT NULL,
+	`username` VARCHAR(255) NOT NULL UNIQUE
+	
+);

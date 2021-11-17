@@ -20,13 +20,13 @@ public class Customer {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "first_name")
+  @Column(name = "first_name", nullable = false)
   private String firstName;
 
-  @Column(name = "last_name")
+  @Column(name = "last_name", nullable = false)
   private String lastName;
 
-  @Column(name = "username", unique = true)
+  @Column(name = "username", unique = true, nullable = false)
   private String username;
 
 
@@ -39,6 +39,15 @@ public class Customer {
     this.firstName = firstName;
     this.lastName = lastName;
     this.username = username;
+  }
+
+  public Customer(Long id, String firstName, String lastName, String username) {
+    super();
+    this.id = id;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.username = username;
+
   }
 
 
