@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import com.qa.hwaproject.domain.Book;
+import com.qa.hwaproject.domain.Customer;
 import com.qa.hwaproject.dto.BookWithUsernameDTO;
 import com.qa.hwaproject.repository.BookRepo;
 
@@ -52,6 +53,15 @@ public class BookService {
     return mapToDTO(readBook);
   }
 
+  // READ BY USERNAME
+  public List<BookWithUsernameDTO> getBooksByUsername(String username) {
+
+    return this.repo.findBooksByUsername(username).stream().map(this::mapToDTO)
+        .collect(Collectors.toList());
+  }
+
+
+  // UPDATE
   public Book update(Long id, Book book) {
     Book existing = this.repo.findById(id).get();
     existing.setAuthorFirstName(book.getAuthorFirstName());
@@ -59,8 +69,28 @@ public class BookService {
     existing.setBookTitle(book.getBookTitle());
     existing.setCheckedOut(book.isCheckedOut());
 
-    return existing;
+    return this.repo.saveAndFlush(existing);
   }
+
+  // Checkout book
+  public Book checkoutBook(Long id, Customer customer) {
+    Book toBeCheckedOut = this.repo.findById(id).get();
+    toBeCheckedOut.setCustomer(customer);
+    toBeCheckedOut.setCheckedOut(true);
+
+    return this.repo.saveAndFlush(toBeCheckedOut);
+  }
+
+  // Return Book
+  public Book returnBook(Long id) {
+
+    Book toBeReturned = this.repo.findById(id).get();
+    toBeReturned.setCustomer(null);
+    toBeReturned.setCheckedOut(false);
+
+    return this.repo.saveAndFlush(toBeReturned);
+  }
+
 
   // DELETE
   public Boolean delete(Long id) {

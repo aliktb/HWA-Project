@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.qa.hwaproject.domain.Book;
+import com.qa.hwaproject.domain.Customer;
 import com.qa.hwaproject.dto.BookWithUsernameDTO;
 import com.qa.hwaproject.service.BookService;
 
@@ -49,6 +50,28 @@ public class BookController {
   public ResponseEntity<Book> update(@PathVariable Long id, @RequestBody Book book) {
     return new ResponseEntity<Book>(this.service.update(id, book), HttpStatus.ACCEPTED);
   }
+
+  // Checkout Book
+  @PutMapping("/checkout/{id}")
+  public ResponseEntity<Book> checkout(@PathVariable Long id, @RequestBody Customer customer) {
+    return new ResponseEntity<Book>(this.service.checkoutBook(id, customer), HttpStatus.ACCEPTED);
+  }
+
+  // Return Book
+  @PutMapping("/return/{id}")
+  public ResponseEntity<Book> returnBook(@PathVariable Long id) {
+    return new ResponseEntity<Book>(this.service.returnBook(id), HttpStatus.ACCEPTED);
+  }
+
+  // Get books by username
+  @GetMapping("/getBooksByUsername/{username}")
+  public ResponseEntity<List<BookWithUsernameDTO>> getBooksByUsername(
+      @PathVariable String username) {
+
+    return new ResponseEntity<List<BookWithUsernameDTO>>(this.service.getBooksByUsername(username),
+        HttpStatus.OK);
+  }
+
 
   // Delete
   @DeleteMapping("/delete/{id}")

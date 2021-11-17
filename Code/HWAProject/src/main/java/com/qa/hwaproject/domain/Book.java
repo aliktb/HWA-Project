@@ -18,13 +18,13 @@ public class Book {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "author_last_name")
+  @Column(name = "author_last_name", nullable = false)
   private String authorLastName;
 
-  @Column(name = "author_first_name")
+  @Column(name = "author_first_name", nullable = false)
   private String authorFirstName;
 
-  @Column(name = "book_title")
+  @Column(name = "book_title", nullable = false)
   private String bookTitle;
 
   @Column(name = "checked_out")
