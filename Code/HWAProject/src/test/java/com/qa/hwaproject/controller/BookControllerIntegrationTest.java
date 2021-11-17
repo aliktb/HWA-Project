@@ -27,7 +27,9 @@ import com.qa.hwaproject.dto.BookWithUsernameDTO;
 @AutoConfigureMockMvc // tells Spring to setup the mockmvc object
 @ActiveProfiles("test") // sets the active profile to 'test'
 // runs the sql files before each test method
-@Sql(scripts = {"classpath:book-schema.sql", "classpath:book-data.sql"},
+@Sql(
+    scripts = {"classpath:book-schema.sql", "classpath:book-data.sql",
+        "classpath:customer-schema.sql", "classpath:customer-data.sql"},
     executionPhase = ExecutionPhase.BEFORE_TEST_METHOD)
 public class BookControllerIntegrationTest {
 
@@ -41,7 +43,7 @@ public class BookControllerIntegrationTest {
   @Test
   public void createTest() throws Exception {
     Book entry = new Book("Dickens", "Charles", "A Christmas Carol", false);
-    Book result = new Book(2L, "Dickens", "Charles", "A Christmas Carol", false);
+    Book result = new Book(3L, "Dickens", "Charles", "A Christmas Carol", false);
 
 
     String entryAsJSON = this.mapper.writeValueAsString(entry);
@@ -74,12 +76,14 @@ public class BookControllerIntegrationTest {
   void testGetAll() throws Exception {
     BookWithUsernameDTO hamlet =
         new BookWithUsernameDTO(1L, "Shakespeare", "William", "Hamlet", false, "no customer");
-    String hamletAsJSON = this.mapper.writeValueAsString(List.of(hamlet));
+    BookWithUsernameDTO tempest =
+        new BookWithUsernameDTO(2L, "Shakespeare", "William", "Tempest", true, "Bobson1");
+    String booksAsJSON = this.mapper.writeValueAsString(List.of(hamlet, tempest));
     RequestBuilder request = get("/books/getAll");
 
     ResultMatcher checkStatus = status().isOk();
 
-    ResultMatcher checkBody = content().json(hamletAsJSON);
+    ResultMatcher checkBody = content().json(booksAsJSON);
 
     this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
   }
