@@ -5,6 +5,7 @@ CREATE TABLE `book`
 	`author_last_name` VARCHAR(255) NOT NULL,
 	`author_first_name` VARCHAR(255) NOT NULL,
 	`book_title` VARCHAR(255) NOT NULL,
-	`checked_out` BOOLEAN
+	`checked_out` BOOLEAN,
+	`customer_id` BIGINT
 	
 );

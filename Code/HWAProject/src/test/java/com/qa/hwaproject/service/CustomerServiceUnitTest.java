@@ -22,11 +22,7 @@ public class CustomerServiceUnitTest {
   @MockBean
   private CustomerRepo repo;
 
-  // @Test
-  // public void createTest() {
-  // Customer input = new Customer("Tim", "Timson", "Timson1");
-  // Customer output = new Customer(1L, "Tim", "Timson", "Timson1");
-  //
+
   @Test
   void testCreate() {
 

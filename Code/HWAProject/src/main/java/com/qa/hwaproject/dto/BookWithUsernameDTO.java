@@ -1,5 +1,7 @@
 package com.qa.hwaproject.dto;
 
+import java.util.Objects;
+
 public class BookWithUsernameDTO {
 
   private Long id;
@@ -84,6 +86,32 @@ public class BookWithUsernameDTO {
 
   public void setUsername(String username) {
     this.username = username;
+  }
+
+
+  @Override
+  public String toString() {
+    return "BookWithUsernameDTO [id=" + id + ", authorLastName=" + authorLastName
+        + ", authorFirstName=" + authorFirstName + ", bookTitle=" + bookTitle + ", checkedOut="
+        + checkedOut + ", username=" + username + "]";
+  }
+
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(authorFirstName, authorLastName, bookTitle, checkedOut, id, username);
+  }
+
+
+  @Override
+  public boolean equals(Object obj) {
+
+    BookWithUsernameDTO other = (BookWithUsernameDTO) obj;
+    return Objects.equals(authorFirstName, other.authorFirstName)
+        && Objects.equals(authorLastName, other.authorLastName)
+        && Objects.equals(bookTitle, other.bookTitle)
+        && Objects.equals(checkedOut, other.checkedOut) && Objects.equals(id, other.id)
+        && Objects.equals(username, other.username);
   }
 
 
