@@ -6,6 +6,7 @@ let newLastNameTextInput = document.querySelector("#newLastNameTextInput");
 let newUsernameTextInput = document.querySelector("#newUsernameTextInput");
 
 let updateButton = document.querySelector("#updateCustomerButton");
+let deleteButton = document.querySelector("#deleteCustomerButton");
 let alertUpdateDiv = document.querySelector("#alertUpdateCustomerDiv");
 
 let addSuccessUpdateMessage = (object) => {
@@ -28,6 +29,20 @@ let addFailUpdateMessage = () => {
   newDiv.classList = "alert alert-danger col-sm mt-4 new-alert";
 
   newDiv.innerHTML = `<strong>Error!</strong> An error has occured!`;
+
+  alertUpdateDiv.appendChild(newDiv);
+
+  setTimeout(function () {
+    $(".new-alert").fadeOut(400);
+  }, 4000);
+};
+
+let addSuccessDeleteMessage = (idVal) => {
+  let newDiv = document.createElement("div");
+
+  newDiv.classList = "alert alert-success col-sm mt-4 new-alert";
+
+  newDiv.innerHTML = `<strong>Success!</strong> Customer with ID <strong>${idVal}</strong> has been deleted!`;
 
   alertUpdateDiv.appendChild(newDiv);
 
@@ -70,4 +85,25 @@ let updateFuntion = (idToUpdate, updatedObject) => {
   });
 };
 
+let deleteFunction = (idVal) => {
+  fetch(`http://localhost:9000/customer/delete/${idVal}`, {
+    method: "DELETE",
+  }).then((response) => {
+    if (response.status == 500) {
+      console.log(response.status);
+      console.error(`Status: ${response.statusText}`);
+      addFailUpdateMessage();
+      console.log(`the delete response failed`);
+      return;
+    }
+    addSuccessDeleteMessage(idVal);
+    response.json().then((data) => {
+      console.log(data);
+    });
+  });
+};
+
 updateButton.addEventListener("click", createUpdatedObject);
+deleteButton.addEventListener("click", () => {
+  deleteFunction(idToUpdateNumberInput.value);
+});

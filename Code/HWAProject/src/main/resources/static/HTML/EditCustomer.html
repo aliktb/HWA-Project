@@ -122,7 +122,7 @@
                 <label
                   for="IDToUpdateNumberInput"
                   class="col-form-label text-nowrap"
-                  >ID of customer to update</label
+                  >ID of customer to make changes to</label
                 >
               </div>
               <div class="col-sm" style="max-width: 10rem">
@@ -187,8 +187,64 @@
                 >
                   Save Changes
                 </button>
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  style="float: right"
+                  data-bs-toggle="modal"
+                  data-bs-target="#deleteModal"
+                >
+                  Delete Customer
+                </button>
               </div>
               <div class="col-sm" id="alertUpdateCustomerDiv"></div>
+              <!-- Modal -->
+
+              <div
+                style="color: black"
+                class="modal fade"
+                id="deleteModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">
+                        Are you sure you want to delete?
+                      </h5>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      This action is irreversible. Once you delete, there is no
+                      going back!
+                    </div>
+                    <div class="modal-footer">
+                      <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                      >
+                        Go Back
+                      </button>
+                      <button
+                        type="button"
+                        class="btn btn-danger"
+                        id="deleteCustomerButton"
+                        data-bs-dismiss="modal"
+                      >
+                        Yes I'm sure. DELETE
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </form>
           </div>
         </div>
