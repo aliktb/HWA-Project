@@ -1,22 +1,28 @@
 "use strict";
 
-let IDToUpdateNumberInput = document.querySelector("#IDToUpdateNumberInput");
-let newFirstNameTextInput = document.querySelector("#newFirstNameTextInput");
-let newLastNameTextInput = document.querySelector("#newLastNameTextInput");
-let newUsernameTextInput = document.querySelector("#newUsernameTextInput");
+let IDToUpdateBookNumberInput = document.querySelector(
+  "#IDToUpdateBookNumberInput"
+);
+let newAuthorFirstNameTextInput = document.querySelector(
+  "#newAuthorFirstNameTextInput"
+);
+let newAuthorLastNameTextInput = document.querySelector(
+  "#newAuthorLastNameTextInput"
+);
+let newBookTitleTextInput = document.querySelector("#newBookTitleTextInput");
 
-let updateButton = document.querySelector("#updateCustomerButton");
-let deleteButton = document.querySelector("#deleteCustomerButton");
-let alertUpdateDiv = document.querySelector("#alertUpdateCustomerDiv");
+let updateBookButton = document.querySelector("#updateBookButton");
+let deleteBookButton = document.querySelector("#deleteBookButton");
+let alertUpdateBookDiv = document.querySelector("#alertUpdateBookDiv");
 
 let addSuccessUpdateMessage = (object) => {
   let newDiv = document.createElement("div");
 
   newDiv.classList = "alert alert-success col-sm mt-4 new-alert";
 
-  newDiv.innerHTML = `<strong>Success!</strong> Customer <strong>${object.firstName} ${object.lastName}</strong> has been updated!`;
+  newDiv.innerHTML = `<strong>Success!</strong> Book <strong>${object.bookTitle}</strong> has been updated!`;
 
-  alertUpdateDiv.appendChild(newDiv);
+  alertUpdateBookDiv.appendChild(newDiv);
 
   setTimeout(function () {
     $(".new-alert").fadeOut(400);
@@ -30,7 +36,7 @@ let addFailUpdateMessage = () => {
 
   newDiv.innerHTML = `<strong>Error!</strong> An error has occured!`;
 
-  alertUpdateDiv.appendChild(newDiv);
+  alertUpdateBookDiv.appendChild(newDiv);
 
   setTimeout(function () {
     $(".new-alert").fadeOut(400);
@@ -42,9 +48,9 @@ let addSuccessDeleteMessage = (idVal) => {
 
   newDiv.classList = "alert alert-success col-sm mt-4 new-alert";
 
-  newDiv.innerHTML = `<strong>Success!</strong> Customer with ID <strong>${idVal}</strong> has been deleted!`;
+  newDiv.innerHTML = `<strong>Success!</strong> Book with ID <strong>${idVal}</strong> has been deleted!`;
 
-  alertUpdateDiv.appendChild(newDiv);
+  alertUpdateBookDiv.appendChild(newDiv);
 
   setTimeout(function () {
     $(".new-alert").fadeOut(400);
@@ -52,22 +58,23 @@ let addSuccessDeleteMessage = (idVal) => {
 };
 
 let createUpdatedObject = () => {
-  let idVal = IDToUpdateNumberInput.value;
-  let updatedFirstNameFromInput = newFirstNameTextInput.value;
-  let updatedLastNameFromInput = newLastNameTextInput.value;
-  let updatedUsernameFromInput = newUsernameTextInput.value;
+  let idVal = IDToUpdateBookNumberInput.value;
+  let updatedAuthorLastNameFromInput = newAuthorLastNameTextInput.value;
+  let updatedAuthorFirstNameFromInput = newAuthorFirstNameTextInput.value;
+
+  let updatedBookTitleFromInput = newBookTitleTextInput.value;
 
   let updatedObj = {
-    firstName: updatedFirstNameFromInput,
-    lastName: updatedLastNameFromInput,
-    username: updatedUsernameFromInput,
+    authorLastName: updatedAuthorLastNameFromInput,
+    authorFirstName: updatedAuthorFirstNameFromInput,
+    bookTitle: updatedBookTitleFromInput,
   };
 
   updateFuntion(idVal, updatedObj);
 };
 
 let updateFuntion = (idToUpdate, updatedObject) => {
-  fetch(`http://localhost:9000/customer/update/${idToUpdate}`, {
+  fetch(`http://localhost:9000/books/update/${idToUpdate}`, {
     method: "PUT",
     body: JSON.stringify(updatedObject),
     headers: {
@@ -86,7 +93,7 @@ let updateFuntion = (idToUpdate, updatedObject) => {
 };
 
 let deleteFunction = (idVal) => {
-  fetch(`http://localhost:9000/customer/delete/${idVal}`, {
+  fetch(`http://localhost:9000/books/delete/${idVal}`, {
     method: "DELETE",
   }).then((response) => {
     if (response.status == 500) {
@@ -103,7 +110,7 @@ let deleteFunction = (idVal) => {
   });
 };
 
-updateButton.addEventListener("click", createUpdatedObject);
-deleteButton.addEventListener("click", () => {
-  deleteFunction(IDToUpdateNumberInput.value);
+updateBookButton.addEventListener("click", createUpdatedObject);
+deleteBookButton.addEventListener("click", () => {
+  deleteFunction(IDToUpdateBookNumberInput.value);
 });

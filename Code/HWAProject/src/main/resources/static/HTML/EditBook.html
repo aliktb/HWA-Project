@@ -11,7 +11,7 @@
       crossorigin="anonymous"
     />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Edit customer</title>
+    <title>Edit book</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,7 +37,7 @@
             </li>
             <li class="nav-item dropdown">
               <a
-                class="nav-link dropdown-toggle active"
+                class="nav-link dropdown-toggle"
                 href="#"
                 id="navbarDropdownCustomersLink"
                 role="button"
@@ -59,15 +59,44 @@
                   <a class="dropdown-item" href="/HTML/AddCustomer.html">Add</a>
                 </li>
                 <li>
-                  <a class="dropdown-item active" href="/HTML/EditCustomer.html"
+                  <a class="dropdown-item" href="/HTML/EditCustomer.html"
                     >Edit</a
                   >
                 </li>
               </ul>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="/HTML/Books.html">Books</a>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle active"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Books
+              </a>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <li>
+                  <a class="dropdown-item" href="/HTML/ViewBooks.html"
+                    >View Books</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/HTML/Credits.html"
+                    >Add Book</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item active" href="/HTML/EditBook.html"
+                    >Edit Book</a
+                  >
+                </li>
+              </ul>
             </li>
             <li class="nav-item dropdown">
               <a
@@ -113,77 +142,77 @@
         "
       >
         <h1 class="display-4 mx-2" style="color: white">
-          Edit an existing customer
+          Edit an existing Book
         </h1>
         <div style="max-width: 50rem">
           <div class="mx-3">
             <form>
               <div class="col-sm">
                 <label
-                  for="IDToUpdateNumberInput"
+                  for="IDToUpdateBookNumberInput"
                   class="col-form-label text-nowrap"
-                  >ID of customer to make changes to</label
+                  >ID of book to make changes to</label
                 >
               </div>
               <div class="col-sm" style="max-width: 10rem">
                 <input
                   type="number"
                   class="form-control"
-                  id="IDToUpdateNumberInput"
+                  id="IDToUpdateBookNumberInput"
                   min="0"
                   max="1000"
                 />
               </div>
               <div class="col-sm">
                 <label
-                  for="newFirstNameTextInput"
+                  for="newBookTitleTextInput"
                   class="col-form-label text-nowrap"
-                  >New First Name</label
+                  >New Book Title</label
                 >
               </div>
               <div class="col-sm">
                 <input
                   type="text"
                   class="form-control"
-                  id="newFirstNameTextInput"
-                  placeholder="New First Name"
+                  id="newBookTitleTextInput"
+                  placeholder="Book Title"
                 />
               </div>
               <div class="col-sm">
                 <label
                   for="newLastNameTextInput"
                   class="col-form-label text-nowrap"
-                  >New Last Name</label
+                  >New Author Last Name</label
                 >
               </div>
               <div class="col-sm">
                 <input
                   type="text"
                   class="form-control"
-                  id="newLastNameTextInput"
-                  placeholder="New Last Name"
+                  id="newAuthorLastNameTextInput"
+                  placeholder="Author Last Name"
                 />
               </div>
               <div class="col-sm">
                 <label
-                  for="newUsernameTextInput"
+                  for="newAuthorFirstNameTextInput"
                   class="col-form-label text-nowrap"
-                  >New Username</label
+                  >New Author First Name</label
                 >
               </div>
               <div class="col-sm">
                 <input
                   type="text"
                   class="form-control"
-                  id="newUsernameTextInput"
-                  placeholder="New username"
+                  id="newAuthorFirstNameTextInput"
+                  placeholder="Author First Name"
                 />
               </div>
               <div class="mt-4 col-sm">
                 <button
                   type="button"
                   class="btn btn-primary"
-                  id="updateCustomerButton"
+                  id="updateBookButton"
                 >
                   Save Changes
                 </button>
@@ -194,10 +223,10 @@
                   data-bs-toggle="modal"
                   data-bs-target="#deleteModal"
                 >
-                  Delete Customer
+                  Delete Book
                 </button>
               </div>
-              <div class="col-sm" id="alertUpdateCustomerDiv"></div>
+              <div class="col-sm" id="alertUpdateBookDiv"></div>
               <!-- Modal -->
 
               <div
@@ -236,7 +265,7 @@
                       <button
                         type="button"
                         class="btn btn-danger"
-                        id="deleteCustomerButton"
+                        id="deleteBookButton"
                         data-bs-dismiss="modal"
                       >
                         Yes I'm sure. DELETE
@@ -250,7 +279,7 @@
         </div>
       </div>
     </div>
-    <script src="../JS/EditCustomer.js"></script>
+    <script src="../JS/EditBook.js"></script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
