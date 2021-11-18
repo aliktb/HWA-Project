@@ -43,5 +43,27 @@ public class Book {
 
   }
 
+  public Book(Long id, String authorLastName, String authorFirstName, String bookTitle,
+      boolean checkedOut) {
+    super();
+    this.id = id;
+    this.authorLastName = authorLastName;
+    this.authorFirstName = authorFirstName;
+    this.bookTitle = bookTitle;
+    this.checkedOut = checkedOut;
+  }
+
+  public Book(Long id, String authorLastName, String authorFirstName, String bookTitle,
+      boolean checkedOut, Customer customer) {
+    super();
+    this.id = id;
+    this.authorLastName = authorLastName;
+    this.authorFirstName = authorFirstName;
+    this.bookTitle = bookTitle;
+    this.checkedOut = checkedOut;
+    this.customer = customer;
+  }
+
+
 
 }
