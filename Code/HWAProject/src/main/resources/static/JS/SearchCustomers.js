@@ -1,6 +1,6 @@
 "use strict";
 
-console.log(`js is linked`);
+console.log(`SearchCustomers.js is linked`);
 
 let idNumberInput = document.querySelector("#idNumberInput");
 let starterDiv = document.querySelector("#starterDiv");
