@@ -1,6 +1,6 @@
 "use strict";
 
-console.log(`BookBooks.js is linked`);
+console.log(`ViewBooks.js is linked`);
 
 let idNumberBookInput = document.querySelector("#idNumberBookInput");
 let starterBookDiv = document.querySelector("#starterBookDiv");
@@ -13,11 +13,12 @@ let addCard = (data) => {
   let headerDiv = document.createElement("div");
   let bodyDiv = document.createElement("div");
   let titleHeader = document.createElement("h5");
+  let statusBadge = document.createElement("span");
   let idPara = document.createElement("p");
   let authorLastNamePara = document.createElement("p");
   let authorFirstNamePara = document.createElement("p");
 
-  cardDiv.classList = "card, card bg-light mb-3 m-3";
+  cardDiv.classList.add("card", "bg-light", "mb-3", "m-3");
   cardDiv.style.maxWidth = "25rem";
   cardDiv.style.minWidth = "25rem";
 
@@ -37,10 +38,23 @@ let addCard = (data) => {
   authorFirstNamePara.classList.add("card-text");
   authorFirstNamePara.textContent = `Author's First name: ${data.authorFirstName}`;
 
+  if (!data.checkedOut) {
+    statusBadge.classList.add("badge", "badge-success");
+    statusBadge.style.float = "right";
+    statusBadge.style.backgroundColor = "green";
+    statusBadge.textContent = "Available";
+  } else {
+    statusBadge.classList.add("badge", "badge-danger");
+    statusBadge.style.float = "right";
+    statusBadge.style.backgroundColor = "red";
+    statusBadge.textContent = "Unavailable";
+  }
+
   starterBookDiv.appendChild(cardDiv);
 
   cardDiv.appendChild(headerDiv);
   headerDiv.appendChild(titleHeader);
+  titleHeader.appendChild(statusBadge);
   cardDiv.appendChild(bodyDiv);
   bodyDiv.appendChild(idPara);
   bodyDiv.appendChild(authorLastNamePara);
