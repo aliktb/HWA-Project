@@ -1,6 +1,6 @@
 "use strict";
 
-let idToUpdateNumberInput = document.querySelector("#idToUpdateNumberInput");
+let IDToUpdateNumberInput = document.querySelector("#IDToUpdateNumberInput");
 let newFirstNameTextInput = document.querySelector("#newFirstNameTextInput");
 let newLastNameTextInput = document.querySelector("#newLastNameTextInput");
 let newUsernameTextInput = document.querySelector("#newUsernameTextInput");
@@ -52,7 +52,7 @@ let addSuccessDeleteMessage = (idVal) => {
 };
 
 let createUpdatedObject = () => {
-  let idVal = idToUpdateNumberInput.value;
+  let idVal = IDToUpdateNumberInput.value;
   let updatedFirstNameFromInput = newFirstNameTextInput.value;
   let updatedLastNameFromInput = newLastNameTextInput.value;
   let updatedUsernameFromInput = newUsernameTextInput.value;
@@ -105,5 +105,5 @@ let deleteFunction = (idVal) => {
 
 updateButton.addEventListener("click", createUpdatedObject);
 deleteButton.addEventListener("click", () => {
-  deleteFunction(idToUpdateNumberInput.value);
+  deleteFunction(IDToUpdateNumberInput.value);
 });

@@ -15,7 +15,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="index.html">QA Library</a>
+        <a class="navbar-brand" href="../index.html">QA Library</a>
         <button
           class="navbar-toggler"
           type="button"
@@ -30,7 +30,10 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html"
+              <a
+                class="nav-link active"
+                aria-current="page"
+                href="../index.html"
                 >Home</a
               >
             </li>
@@ -65,8 +68,42 @@
               </ul>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link" href="/HTML/Books.html">Books</a>
+            <li class="nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdownMenuLink"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Books
+              </a>
+              <ul
+                class="dropdown-menu"
+                aria-labelledby="navbarDropdownMenuLink"
+              >
+                <li>
+                  <a class="dropdown-item" href="/HTML/ViewBooks.html"
+                    >View Books</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/HTML/AddBook.html"
+                    >Add Book</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/HTML/EditBook.html"
+                    >Edit Book</a
+                  >
+                </li>
+                <li>
+                  <a class="dropdown-item" href="/HTML/BorrowBook.html"
+                    >Borrow/Return Book</a
+                  >
+                </li>
+              </ul>
             </li>
             <li class="nav-item dropdown">
               <a
