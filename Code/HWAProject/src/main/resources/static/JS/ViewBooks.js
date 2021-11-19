@@ -17,6 +17,7 @@ let addCard = (data) => {
   let idPara = document.createElement("p");
   let authorLastNamePara = document.createElement("p");
   let authorFirstNamePara = document.createElement("p");
+  let usernameCheckedOut = document.createElement("p");
 
   cardDiv.classList.add("card", "bg-light", "mb-3", "m-3");
   cardDiv.style.maxWidth = "25rem";
@@ -37,6 +38,9 @@ let addCard = (data) => {
 
   authorFirstNamePara.classList.add("card-text");
   authorFirstNamePara.textContent = `Author's First name: ${data.authorFirstName}`;
+
+  usernameCheckedOut.classList.add("card-text");
+  usernameCheckedOut.textContent = `Customer username: ${data.username}`;
 
   if (!data.checkedOut) {
     statusBadge.classList.add("badge", "badge-success");
@@ -59,6 +63,7 @@ let addCard = (data) => {
   bodyDiv.appendChild(idPara);
   bodyDiv.appendChild(authorLastNamePara);
   bodyDiv.appendChild(authorFirstNamePara);
+  bodyDiv.appendChild(usernameCheckedOut);
 };
 
 let clearScreen = () => {
