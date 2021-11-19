@@ -125,21 +125,43 @@ let readCustomerByID = (idVal, newBook) => {
   });
 };
 
-let deleteFunction = (idVal) => {
-  fetch(`http://localhost:9000/books/return/${idVal}`, {
-    method: "DELETE",
+let readBookReturnByID = (bookToReturnID) => {
+  fetch(`http://localhost:9000/books/getById/${bookToReturnID}`).then(
+    (response) => {
+      if (response.status < 200 || response.status > 299) {
+        console.error(`status: ${response.status}`);
+        console.log(typeof idVal);
+
+        return;
+      }
+      response.json().then((json) => {
+        console.log(json);
+        //return json;
+        returnBookFunction(bookToReturnID, json);
+      });
+
+      console.log("book fetched");
+    }
+  );
+};
+
+let returnBookFunction = (bookID, newBook) => {
+  fetch(`http://localhost:9000/books/return/${bookID}`, {
+    method: "PUT",
+
+    headers: {
+      "Content-type": "application/json; charset=UTF-8",
+    },
   }).then((response) => {
-    if (response.status == 500) {
-      console.log(response.status);
-      console.error(`Status: ${response.statusText}`);
-      addFailUpdateMessage();
-      console.log(`the delete response failed`);
+    if (response.status < 200 || response.status > 299) {
+      console.error(`status: ${response.status}`);
+      addFailCheckoutMessage();
+      console.log(`There was an error trying to return a book`);
       return;
     }
-    addSuccessDeleteMessage(idVal);
-    response.json().then((data) => {
-      console.log(data);
-    });
+
+    addSuccessReturnMessage(newBook);
+    response.json().then((json) => console.log(json));
   });
 };
 
@@ -148,5 +170,5 @@ checkoutBookButton.addEventListener("click", () => {
 });
 
 returnBookButton.addEventListener("click", () => {
-  deleteFunction(IDToUpdateBookNumberInput.value);
+  readBookReturnByID(IDToBorrowBookNumberInput.value);
 });
