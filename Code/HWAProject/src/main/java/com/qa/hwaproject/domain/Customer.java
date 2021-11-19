@@ -50,6 +50,10 @@ public class Customer {
 
   }
 
+  public Customer(Long id) {
+    this.id = id;
+  }
+
 
 
 }

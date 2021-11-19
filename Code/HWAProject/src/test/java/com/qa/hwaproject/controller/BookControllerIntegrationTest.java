@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.qa.hwaproject.domain.Book;
+import com.qa.hwaproject.domain.Customer;
 import com.qa.hwaproject.dto.BookWithUsernameDTO;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -112,5 +114,84 @@ public class BookControllerIntegrationTest {
     this.mvc.perform(delete("/books/delete/1")).andExpect(status().isNoContent());
   }
 
+  @Test
+  void testCheckout() throws Exception {
 
+    Customer newCustomer = new Customer(1L);
+    Customer bob = new Customer(1L, "Bob", "Bobson", "Bobson1");
+
+    String papAsJSON = this.mapper.writeValueAsString(newCustomer);
+    RequestBuilder request =
+        put("/books/checkout/1").contentType(MediaType.APPLICATION_JSON).content(papAsJSON);
+
+    ResultMatcher checkStatus = status().isAccepted(); // matcher that we will use to test the
+                                                       // response
+
+    Book bookCheckedOut = new Book(1L, "Shakespeare", "William", "Hamlet", true);
+    String meSavedAsJSON = this.mapper.writeValueAsString(bookCheckedOut);
+
+    ResultMatcher checkBody = content().json(meSavedAsJSON);
+
+    System.out.println(checkBody);
+
+    this.mvc.perform(request).andExpect(checkStatus);
+
+  }
+
+  @Test
+  void testReturnBook() throws Exception {
+
+    Customer newCustomer = new Customer(1L);
+    Customer bob = new Customer(1L, "Bob", "Bobson", "Bobson1");
+    Customer noCustomer = new Customer(1L, "null", "null", "null");
+
+    String papAsJSON = this.mapper.writeValueAsString(newCustomer);
+    RequestBuilder request =
+        put("/books/return/1").contentType(MediaType.APPLICATION_JSON).content(papAsJSON);
+
+    ResultMatcher checkStatus = status().isAccepted(); // matcher that we will use to test the
+                                                       // response
+
+    Book bookCheckedOut = new Book(1L, "Shakespeare", "William", "Hamlet", false, null);
+    String meSavedAsJSON = this.mapper.writeValueAsString(bookCheckedOut);
+
+    ResultMatcher checkBody = content().json(meSavedAsJSON);
+
+    System.out.println(checkBody);
+
+    this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
+
+  }
+
+  @Test
+  void testgetBooksByUsername() throws Exception {
+
+
+    BookWithUsernameDTO newBook =
+        new BookWithUsernameDTO(2L, "Shakespeare", "William", "Tempest", true, "Bobson1");
+
+
+    RequestBuilder request = get("/books/getBooksByUsername/Bobson1");
+    System.out.println("line 174");
+
+    ResultMatcher checkStatus = status().isOk(); // matcher that we will use to test the
+                                                 // response
+
+
+
+    List<BookWithUsernameDTO> newList = new ArrayList<>();
+
+    newList.add(newBook);
+
+    String expected = this.mapper.writeValueAsString(newList);
+
+    ResultMatcher checkBody = content().json(expected);
+
+    System.out.println(checkBody);
+
+    this.mvc.perform(request).andExpect(checkStatus).andExpect(checkBody);
+
+  }
 }
+
+
