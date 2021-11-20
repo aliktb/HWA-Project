@@ -1,0 +1,128 @@
+
+@startuml
+CustomerController <-- CustomerService
+BookController <-- BookService
+
+CustomerService <-- CustomerRepo
+CustomerService <-- Customer
+BookService <-- BookWithUsernameDTO
+BookService <-- BookRepo
+Book <-- Customer
+BookService <-- Book
+
+
+
+
+class BookController{
+-service: BookService
++create(Book):ResponseEntity<Book>
++getAll():ResponseEntity<List<BookWithUsernameDTO>>
++getOne(Long):ResponseEntity<BookWithUsernameDTO>
++update(Book):ResponseEntity<Book>
++checkout(Book):ResponseEntity<Book>
++return(Book):ResponseEntity<Book>
++getBooksByUsername(String):ResponseEntity<List<BookWithUsernameDTO>>
++delete(Long):ResponseEntity<Book>
+}
+
+class CustomerController{
+-service: CustomerService
++create(Customer):ResponseEntity<Customer>
++getAll():ResponseEntity<List<Customer>>
++getOne(Long):ResponseEntity<Customer>
++update(Customer):ResponseEntity<Customer>
++delete(Long):ResponseEntity<Customer>
+
+}
+
+class BookService{
+-repo: BookRepo 
+-mapTODTO(Book):BookWithUsernameDTO
++create(): Book
++getAll():List<BookWithUsernameDTO>
++getById():BookWithUsernameDTO
++getBooksByUsername(String): List<BookWithUsernameDTO>
++update(Long,Book):Book
++checkoutBook(Long,Customer):Book
++returnBook(Long):Book
++delete(Long):boolean
+
+}
+
+
+class CustomerService{
+-repo: CustomerRepo 
++create(): Customer
++getAll():List<Customer>
++getById():Customer
++update(Long,Customer):Customer
++delete(Long):boolean
+
+}
+
+class BookWithUsernameDTO{
+-id : Long
+-authorFirstName: String
+-authorLastName: String
+-bookTitle:String
+-checkedOut: bool
+-username: String
++getId():Long
++setId(Long):Long
++getAuthorFirstName(): String
+setAuthorFirstName(String):String
++getAuthorLastName(): String
++setAuthorLastName(String):String
++getBookTitle() : String
++setBookTitle(String): String
++getUsername() : String
++setUsername(String): String
+}
+
+
+interface CustomerRepo{
+
+}
+
+interface BookRepo{
++findBooksByUsername(String): List<Book>
+}
+
+class Customer{
+-id : Long
+-firstName: String
+-lastName: String
+-userName:String
++getId():Long
++setId(Long):Long
++getFirstName(): String
+setFirstName(String):String
++getLastName(): String
++setLastName(String):String
++getUsername() : String
++setUsername(String): String
+
+}
+
+class Book{
+-id : Long
+-authorFirstName: String
+-authorLastName: String
+-bookTitle:String
+-checkedOut: bool
+-customer: Customer
++getId():Long
++setId(Long):Long
++getAuthorFirstName(): String
+setAuthorFirstName(String):String
++getAuthorLastName(): String
++setAuthorLastName(String):String
++getBookTitle() : String
++setBookTitle(String): String
++getCheckedOut():bool
++setCheckedOut():bool
++getCustomer(): Customer
++setCustomer(): Customer
+}
+
+@enduml
